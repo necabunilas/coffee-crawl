@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Photo {
+  id           String   @id @default(cuid())
+  cloudinaryId String   @unique
+  url          String
+  uploaderName String
+  description  String
+  createdAt    DateTime @default(now())
+}
