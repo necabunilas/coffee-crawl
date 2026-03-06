@@ -32,6 +32,7 @@ export default function DropzoneUploader() {
   const [uploaderName, setUploaderName] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -67,7 +68,8 @@ export default function DropzoneUploader() {
       });
 
       if (res.ok) {
-        router.push("/gallery");
+        setSuccess(true);
+        setTimeout(() => router.push("/gallery"), 1500);
       } else {
         const data = await res.json();
         setError(data.error ?? "Failed to save photo.");
@@ -134,7 +136,7 @@ export default function DropzoneUploader() {
             className={inputClass}
           />
           <textarea
-            placeholder="Say something about this photo… (optional)"
+            placeholder="Say something about this photo…"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
@@ -145,13 +147,19 @@ export default function DropzoneUploader() {
 
       {error && <p className="text-cinnabar text-xs text-center">{error}</p>}
 
-      <button
-        onClick={handleUpload}
-        disabled={!file || loading}
-        className="w-full bg-cinnabar text-linen rounded-xl px-4 py-3 text-sm font-medium hover:bg-cinnabar/80 disabled:bg-olive/20 disabled:text-olive/40 disabled:cursor-not-allowed transition"
-      >
-        {loading ? "Uploading…" : "Share photo"}
-      </button>
+      {success ? (
+        <div className="w-full rounded-xl px-4 py-3 bg-olive/10 text-center text-sm text-carbon font-medium">
+          Photo shared! Heading to the gallery…
+        </div>
+      ) : (
+        <button
+          onClick={handleUpload}
+          disabled={!file || loading}
+          className="w-full bg-cinnabar text-linen rounded-xl px-4 py-3 text-sm font-medium hover:bg-cinnabar/80 disabled:bg-olive/20 disabled:text-olive/40 disabled:cursor-not-allowed transition"
+        >
+          {loading ? "Uploading…" : "Share photo"}
+        </button>
+      )}
     </div>
   );
 }
