@@ -13,19 +13,8 @@ type Photo = {
 };
 
 export default function PhotoGrid({ initialPhotos }: { initialPhotos: Photo[] }) {
-  const [photos, setPhotos] = useState(initialPhotos);
+  const [photos] = useState(initialPhotos);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  async function handleDelete(id: string) {
-    if (!confirm("Delete this photo permanently?")) return;
-
-    const res = await fetch(`/api/photos/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      setPhotos((prev) => prev.filter((p) => p.id !== id));
-    } else {
-      alert("Failed to delete photo. Please try again.");
-    }
-  }
 
   if (photos.length === 0) {
     return (
@@ -48,7 +37,6 @@ export default function PhotoGrid({ initialPhotos }: { initialPhotos: Photo[] })
           <PhotoCard
             key={photo.id}
             photo={photo}
-            onDelete={() => handleDelete(photo.id)}
             onOpen={() => setLightboxIndex(index)}
           />
         ))}
