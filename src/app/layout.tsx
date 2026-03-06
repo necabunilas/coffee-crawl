@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Photo Gallery",
-  description: "Admin photo gallery",
+  title: "Kaamulan Coffee Crawl Gallery",
+  description: "Kaamulan Coffee Crawl 2026 photo gallery",
 };
 
 export default function RootLayout({
