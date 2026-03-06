@@ -14,11 +14,9 @@ export default function Home() {
 
         {/* Tagline */}
         <div className="space-y-2">
-          <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-cinnabar/40" />
-            <p className="text-xs text-carbon tracking-wider uppercase">Photo Gallery</p>
-            <span className="h-px w-8 bg-cinnabar/40" />
-          </div>
+          <h1 className="text-lg font-semibold text-carbon leading-snug">
+            Welcome to Kaamulan<br />Coffee Crawl Gallery
+          </h1>
           <p className="text-olive text-sm">Share and relive the memories.</p>
         </div>
 
